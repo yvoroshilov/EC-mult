@@ -138,28 +138,3 @@ function getFormInputs(values = false) {
         }
     }
 }
-
-
-
-
-
-/*
-https://livebook.manning.com/book/webassembly-in-action/b-ccall-cwrap-and-direct-function-calls/v-7/18
-The ccall function allows you to call a function in the WebAssembly module and receive the results. The ccall function accepts four parameters:
-
-A string indicating the name of the function in the module that you want to call. When Emscripten creates a WebAssembly module, it will add an underscore character before the function name. Don’t include the leading underscore character as the ccall function will include that for you.
-The function’s return type. The following values can be specified:
-null if the function returns void
-'number' if the function returns an integer, float, or pointer
-'string' if the function returns a char*. This is optional and is here for convenience. If used, the ccall function will handle the memory management of the returned string for you.
-An array indicating the data types of the parameters. This array needs to have the same number of items as there are parameters to the function and it needs to be in the same order. The values that can be specified are:
-'number' if the parameter is an integer, float, or pointer
-'string' can be used for a char* parameter. If used, the ccall function will handle the memory management of the string for you. When using this approach, the value is considered temporary because the memory will be freed the moment the function returns.
-'array' can be used but only for 8-bit array values.
-An array of values to pass to the function. Each array item corresponds to the parameters of the function and must be in the same order.
-The third parameter’s string and array data types are there for convenience by handling the work of creating a pointer, copying the value into memory, and then freeing that memory once the function call has completed. These values are considered to be temporary and will only be there while the function is executing. If the WebAssembly module code saves the pointer for future use, it may point to invalid data.
-
-If you want objects to live longer then you need to allocate and deallocate the memory manually using the Emscripten functions _malloc and _free. In this case you wouldn’t use string or array for the parameter type but rather number because you’ll be passing a pointer directly and not using Emscripten’s memory management help.
-
-If you need to pass an array that has values greater than 8-bit, 32-bit integers for example, then you’ll need to pass a pointer rather than the array type. Section B.3 shows how to pass an array to a module manually.
-*/
