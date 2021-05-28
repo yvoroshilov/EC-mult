@@ -162,7 +162,7 @@ BigInteger EllipticCurve::findSlope(BigInteger x1, BigInteger y1, BigInteger x2,
 
     // ------------ POINT DOUBLING --------------
     if ((x1 == x2) && (y1 == y2)) {
-        numerator = modulo(3*x1*x1 + this->a, M);
+        numerator = modulo(3*x1*x1 + a, M);
         denominator = modulo(2*y1, M);
     }
     // ------------ Point Addition --------------
@@ -171,14 +171,15 @@ BigInteger EllipticCurve::findSlope(BigInteger x1, BigInteger y1, BigInteger x2,
         denominator = modulo(x2-x1, M);
     }
     if (denominator == 0) {
-        throw exception();
+        return 0;
     }
     /* since slope is modular division, if the numerator and denominator
      * are not coprime, we need to multiply the numerator by the modular 
      * inverse of denominator.
      */
-    BigInteger inv = inverseMod(denominator, this->M);
-    slope = inv * numerator % this->M;
+    BigInteger *inv = inverseMod(denominator, M);
+    slope = *inv * numerator % M;
+    delete inv;
     return slope;
 }
 

@@ -19,6 +19,9 @@ const server = http.createServer(function(request, response) {
 			if (err) {
 				throw err; 
 			}
+			if (request.url.endsWith(".wasm")) {
+				response.setHeader("Content-Type", "application/wasm");
+			}
 			response.write(file);  
 			response.end(); 
 		});

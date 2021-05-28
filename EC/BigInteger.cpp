@@ -797,7 +797,7 @@ int32_t BI_FastExp(BigInteger base, int64_t exp, int32_t m) {
 BigInteger BI_ModInv(BigInteger a, BigInteger m) {
   m.trim();
   if (m.sign == -1 || m.a.size() == 0)
-    return *(new BigInteger());
+    return BigInteger();
   BigInteger m0(m), x0(0), x1(1);
   BigInteger t, q;
   if (m == 1)
